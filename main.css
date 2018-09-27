@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
+:root {
+  --pastel-gray: #c9cebd;
+  --malachite: #20bf55;
+  --tomato: #ff6542;
+  --black-coral: #59656f; 
+  --white-blue: #e1e8f0;
+  --light-gray: #fdfdfd;
+}
+
+html {
+  font-size: 100%;
+  font-weight: 500;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--black-coral);
+}
+
+.bg-pastel-gray {
+  background-color: var(--pastel-gray);
+}
+
+.bg-light-gray {
+  background-color: var(--white-blue);
+}
+
+.container {
+  width: 75rem;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.add-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.item:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.items-info {
+  display: flex;
+  justify-content: space-around;
+  min-height: 80vh;
+  padding: 3rem 2rem;
+}
+
+.incomes {
+  width: 40%;
+}
+
+.expenses {
+  width: 40%;
+}
