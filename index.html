@@ -9,46 +9,107 @@
   <title>Account Balance</title>
 </head>
 <body>
-  <header class="bg-color">
+  <header class="bg-green text-center">
     <div class="container">
-      <div class="balance">
-        <h1>Account Balance in September</h1>
-        
-        <h2 class="balance__amount">2000.00</h2>
-      </div>
+      <h1 class="heading-1">Account Balance in September</h1>
     </div>
   </header>
   
   <main>
-    <section class="bg-pastel-gray">
+    <section class="bg-light-gray">
       <div class="container add-items">
-        <div class="type item">
-          <select name="" id="">
-            <option value="">Income</option>
-            <option value="">Expense</option>
+        <div class="type input-item">
+          <select class="item-type">
+            <option value="inccome">Income</option>
+            <option value="expense">Expense</option>
           </select>
         </div>
         
-        <div class="description item">
-          <input type="text" class="description__input">
+        <div class="description input-item">
+          <input type="text" class="description__input" placeholder="Add description">
         </div>
         
-        <div class="amount item">
-          <input type="number" class="amount-__input">
+        <div class="amount input-item">
+          <input type="number" class="amount__input" placeholder="Value">
         </div>
         
-        <button class="item add-btn">Add</button>
+        <button class="input-item add-btn">
+          <svg version="1.1" class="svg" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve" width="25px" height="25px">
+            <circle class="add-circle" cx="25" cy="25" r="25" />
+            <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;"
+              x1="25" y1="13" x2="25" y2="38" />
+            <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;"
+              x1="37.5" y1="25" x2="12.5" y2="25" />
+          </svg>
+        </button>
       </div>
     </section>
 
-    <section class="">
+    <section class="bg-light-gray">
+      <div class="container balance">
+        <p>Balance: -10000</p> 
+      </div>
+    </section>
+
+    <section class="bg-light-gray">
       <div class="container items-info">
-        <div class="incomes bg-light-gray">
-          <h4>Income</h4>
+        <div class="incomes">
+          <h4 class="text-center income-heading heading">Income</h4>
+
+          <div class="income__items">
+            <div class="item">
+              <div class="item__date">- 13/6/2018 9:30</div>
+
+              <div class="item__details">
+                <p class="description">Salary</p>
+                <p class="value">2700</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="item__date">- 13/6/2018 9:30</div>
+            
+              <div class="item__details">
+                <p class="description">Salary</p>
+                <p class="value">2700</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="incomes__total">
+            <p>Total incomes: </p>
+            <p class="text-green">20000</p>
+          </div>
         </div>
         
-        <div class="expenses bg-light-gray">
-          <h4>Expense</h4>
+        <div class="expenses">
+          <h4 class="text-center expense-heading heading">Expense</h4>
+
+          <div class="expense__items">
+            <div class="item">
+              <div class="item__date">- 13/6/2018 9:30</div>
+          
+              <div class="item__details">
+                <p class="description">Salary</p>
+                <p class="value">2700</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="item__date">- 13/6/2018 9:30</div>
+            
+              <div class="item__details">
+                <p class="description">Salary</p>
+                <p class="value">2700</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="expenses__total">
+            <p>Total expenses: </p>
+            <p class="text-red">30000</p>
+          </div>
         </div>
       </div>
     </section>
