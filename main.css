@@ -27,10 +27,6 @@ body {
   color: var(--black-coral);
 }
 
-button:focus {
-  outline: none;
-}
-
 input:focus::placeholder {
   color: transparent;
 }
@@ -71,13 +67,13 @@ input:focus::placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 1rem 2rem 1rem;
+  padding: 2rem;
 }
 
 .item-type {
   border: 1px solid #e7e7e7;
   width: 90px;
-  height: 35px;
+  height: 49px;
   background-color: var(--white);
   font-size: 14px;
   color: inherit;
@@ -92,7 +88,7 @@ input:focus::placeholder {
 }
 
 .amount__input {
-  width: 100px;
+  width: 120px;
 }
 
 .description__input, 
@@ -100,7 +96,7 @@ input:focus::placeholder {
   border: 1px solid #e7e7e7;
   background-color: var(--white);
   font-size: 14px;
-  padding: 8px 15px;
+  padding: 15px;
   border-radius: 5px;
   transition: border 0.3s;
 }
@@ -111,11 +107,6 @@ input:focus::placeholder {
   border: 1px solid var(--malachite);
 }
 
-.add-btn {
-  border: none;
-  background: none;
-}
-
 .add-circle {
   fill: var(--malachite);
 }
@@ -124,14 +115,29 @@ input:focus::placeholder {
   fill: var(--polished-pine);
 }
 
-.add-btn:active {
-  transform: translateY(2px);
+.value-btn-container {
+  display: flex;
+  align-items: center;
 }
 
-.add-btn__icon {
+.btn {
+  border: none;
+  background: none;
   width: 25px;
   height: 25px;
   cursor: pointer;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active {
+  transform: translateY(2px);
+}
+
+.income-delete-btn circle {
+  fill: var(--malachite) !important;
 }
 
 .input-item:not(:last-child) {
@@ -189,7 +195,15 @@ input:focus::placeholder {
 }
 
 .item {
-  margin-bottom: 1rem;
+  padding: 20px 20px 10px 20px;
+}
+
+.item:first-child { 
+  border-top: 1px solid #e7e7e7; 
+}
+
+.item:nth-child(even) { 
+  background-color: var(--light-gray); 
 }
 
 .item__date {
@@ -199,10 +213,28 @@ input:focus::placeholder {
 .item__details {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.delete-btn {
+  display: none;
+}
+
+.value {
+  padding: 10px 0;
 }
 
 .income__items .value {
   color: var(--malachite);
+  transition: all 0.2s;
+}
+
+.value-btn-container:hover .value {
+  transform: translateX(-20px);
+}
+
+.value-btn-container:hover .delete-btn {
+  display: inline-block;
 }
 
 .incomes__total,
@@ -217,4 +249,5 @@ input:focus::placeholder {
 
 .expense__items .value {
   color: var(--tomato);
+  transition: all 0.2s;
 }
