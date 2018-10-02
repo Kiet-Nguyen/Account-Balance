@@ -70,6 +70,7 @@ input:focus::placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   padding: 2rem;
 }
 
@@ -146,6 +147,7 @@ input:focus::placeholder {
 .items-info {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   min-height: 80vh;
   padding: 2rem;
 }
@@ -253,4 +255,15 @@ input:focus::placeholder {
 .expense__items .value {
   color: var(--tomato);
   transition: all 0.2s;
+}
+
+@media only screen and (max-width: 768px) {
+  .incomes,
+  .expenses {
+    flex: 100%;
+  }
+
+  .incomes {
+    margin-bottom: 2rem;
+  }
 }

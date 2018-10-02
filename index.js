@@ -63,6 +63,22 @@ const budgetController = (() => {
       return newItem;
     },
 
+    deleteItem: (type, id) => {
+      let itemIDIndex;
+      // Store ids of all remaining items
+      const ids = data.allItems[type].map(currItem => {
+        return currItem.id;
+      });
+
+      // Find the index number of current target
+      itemIDIndex = ids.indexOf(id);
+
+      // Delete the target if it's still inside the array
+      if (itemIDIndex !== -1) {
+        data.allItems[type].splice(itemIDIndex, 1);
+      }
+    },
+
     calculateBudget: () => {
       // Total income and expense
       calculateTotal('income');
@@ -108,7 +124,8 @@ const UIController = (() => {
     expenseContainer: document.querySelector('.expense__items'),
     balanceValue: document.querySelector('.balance-value'),
     totalIncome: document.querySelector('.total-income'),
-    totalExpense: document.querySelector('.total-expense')
+    totalExpense: document.querySelector('.total-expense'),
+    containerIncAndExp: document.querySelector('.js-event-delagation')
   };
 
   elements.title.textContent = `Account balance in`;
@@ -156,6 +173,11 @@ const UIController = (() => {
       }
     },
 
+    deleteListItem: itemID => {
+      const targetElement = document.getElementById(itemID);
+      targetElement.parentNode.removeChild(targetElement);
+    },
+
     clearFields: () => {
       elements.inputDescription.value = '';
       elements.inputAmount.value = '';
@@ -177,16 +199,18 @@ const controller = ((budgetCtrl, UICtrl) => {
   const setupEventListerners = () => {
     const DOMElements = UICtrl.getDOMElements();
     // Click
-    DOMElements.addButton.addEventListener('click', addItem);
+    DOMElements.addButton.addEventListener('click', ctrlAddItem);
     // Enter
     document.addEventListener('keypress', event => {
       if (event.keyCode === 13 || event.which === 13) {
-        addItem();
+        ctrlAddItem();
       }
     });
+    // Event delegation to delete button
+    DOMElements.containerIncAndExp.addEventListener('click', ctrlDeleteItem);
   };
 
-  const updateBudget = () => {
+  const ctrlUpdateBudget = () => {
     // Calculate the budget
     budgetCtrl.calculateBudget();
 
@@ -197,7 +221,7 @@ const controller = ((budgetCtrl, UICtrl) => {
     UICtrl.displayBudget(budget);
   };
 
-  const addItem = () => {
+  const ctrlAddItem = () => {
     let input, newItem;
     // Get input field
     input = UICtrl.getInput();
@@ -213,8 +237,28 @@ const controller = ((budgetCtrl, UICtrl) => {
       UICtrl.clearFields();
 
       // Calculate and update budget
-      updateBudget();
+      ctrlUpdateBudget();
     }
+  };
+
+  const ctrlDeleteItem = event => {
+    let itemID, type, id;
+    itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
+
+    if (itemID) {
+      const typeIDArr = itemID.split('-');
+      type = typeIDArr[0];
+      id = parseInt(typeIDArr[1]);
+    }
+
+    // Delete item from data structure
+    budgetCtrl.deleteItem(type, id);
+
+    // Remove item from UI
+    UICtrl.deleteListItem(itemID);
+
+    // Calculate and update budget
+    ctrlUpdateBudget();
   };
 
   return {
