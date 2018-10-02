@@ -130,6 +130,29 @@ const UIController = (() => {
 
   elements.title.textContent = `Account balance in`;
 
+  const formatNumber = (num, type) => {
+    let numSplit, intPart, decimalPart, sign, result;
+
+    num = Math.abs(num);
+    num = num.toFixed(2);
+
+    numSplit = num.split('.');
+    intPart = numSplit[0];
+    // Add ',' to seperate thousand
+    if (intPart.length > 3) {
+      intPart = `${intPart.substring(0, intPart.length - 3)},${intPart.substring(intPart.length - 3, intPart.length)}
+      `;
+    }
+    decimalPart = numSplit[1];
+
+    type === 'income' ? (sign = '+') : (sign = '-');
+
+    num > 0
+      ? (result = `${sign} ${intPart}.${decimalPart}`)
+      : (result = `${intPart}.${decimalPart}`);
+    return result;
+  };
+
   return {
     getInput: () => {
       const descriptionCapitalized =
@@ -157,7 +180,7 @@ const UIController = (() => {
           <div class="item__details">
             <p class="description">${obj.description}</p>
             <div class="value-btn-container">
-              <p class="value">${obj.amount}€</p>
+              <p class="value">${formatNumber(obj.amount, type)}€</p>
               <button class="btn delete-btn">
                 <img class="${type}-delete-btn" src="./img/${type}-delete-icon.svg" alt="Delete icon">
               </button>
@@ -184,9 +207,18 @@ const UIController = (() => {
     },
 
     displayBudget: obj => {
-      elements.balanceValue.textContent = `${obj.balance}€`;
-      elements.totalIncome.textContent = `${obj.totalIncome}€`;
-      elements.totalExpense.textContent = `${obj.totalExpense}€`;
+      let type;
+      obj.balance > 0 ? (type = 'income') : (type = 'expense');
+
+      elements.balanceValue.textContent = `${formatNumber(obj.balance, type)}€`;
+      elements.totalIncome.textContent = `${formatNumber(
+        obj.totalIncome,
+        'income'
+      )}€`;
+      elements.totalExpense.textContent = `${formatNumber(
+        obj.totalExpense,
+        'expense'
+      )}€`;
     },
 
     getDOMElements: () => {
