@@ -120,6 +120,7 @@ const UIController = (() => {
     inputDescription: document.querySelector('.description__input'),
     inputAmount: document.querySelector('.amount__input'),
     addButton: document.querySelector('.add-btn'),
+    addButtonCircle: document.querySelector('.add-circle'),
     incomeContainer: document.querySelector('.income__items'),
     expenseContainer: document.querySelector('.expense__items'),
     balanceValue: document.querySelector('.balance-value'),
@@ -127,8 +128,6 @@ const UIController = (() => {
     totalExpense: document.querySelector('.total-expense'),
     containerIncAndExp: document.querySelector('.js-event-delagation')
   };
-
-  elements.title.textContent = `Account balance in`;
 
   const formatNumber = (num, type) => {
     let numSplit, intPart, decimalPart, sign, result;
@@ -139,9 +138,19 @@ const UIController = (() => {
     numSplit = num.split('.');
     intPart = numSplit[0];
     // Add ',' to seperate thousand
-    if (intPart.length > 3) {
-      intPart = `${intPart.substring(0, intPart.length - 3)},${intPart.substring(intPart.length - 3, intPart.length)}
-      `;
+    if (intPart.length > 6) {
+      intPart = `${intPart.substring(
+        0,
+        intPart.length - 6
+      )},${intPart.substring(
+        intPart.length - 6,
+        intPart.length - 3
+      )},${intPart.substring(intPart.length - 3, intPart.length)}`;
+    } else if (intPart.length > 3) {
+      intPart = `${intPart.substring(
+        0,
+        intPart.length - 3
+      )},${intPart.substring(intPart.length - 3, intPart.length)}`;
     }
     decimalPart = numSplit[1];
 
@@ -221,6 +230,29 @@ const UIController = (() => {
       )}€`;
     },
 
+    displayMonthYear: () => {
+      let now, month, months, year, monthYear;
+
+      now = new Date();
+
+      months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber', 'December'];
+      month = months[now.getMonth()];
+      year = now.getFullYear();
+      monthYear = `${month}, ${year}`;
+
+      elements.title.textContent = `Account balance in ${monthYear}`;
+    },
+
+    changedType: () => {
+      const fields = document.querySelectorAll('.item-type, .description__input, .amount__input');
+
+      fields.forEach(field => {
+        field.classList.toggle('type-expense-focus');
+      });
+
+      elements.addButtonCircle.classList.toggle('add-circle-expense-color');
+    },
+
     getDOMElements: () => {
       return elements;
     }
@@ -240,6 +272,8 @@ const controller = ((budgetCtrl, UICtrl) => {
     });
     // Event delegation to delete button
     DOMElements.containerIncAndExp.addEventListener('click', ctrlDeleteItem);
+    // Change input border color when type is changed
+    DOMElements.inputType.addEventListener('change', UICtrl.changedType);
   };
 
   const ctrlUpdateBudget = () => {
@@ -295,6 +329,7 @@ const controller = ((budgetCtrl, UICtrl) => {
 
   return {
     init: () => {
+      UICtrl.displayMonthYear();
       UICtrl.displayBudget({
         balance: 0,
         totalIncome: 0,

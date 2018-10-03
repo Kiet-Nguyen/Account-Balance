@@ -10,6 +10,7 @@
   --malachite: #20bf55;
   --polished-pine: #6ba292;
   --tomato: #ff6542;
+  --tomato-2: #df583a;
   --black-coral: #59656f; 
   --white-blue: #e1e8f0;
   --light-gray: #f5f4f4;
@@ -106,17 +107,30 @@ input:focus::placeholder {
 }
 
 .description__input:focus,
-.amount__input:focus {
+.amount__input:focus,
+.item-type:focus {
   outline: none;
   border: 1px solid var(--malachite);
+}
+
+.type-expense-focus:focus {
+  border: 1px solid var(--tomato);
 }
 
 .add-circle {
   fill: var(--malachite);
 }
 
+.add-circle-expense-color {
+  fill: var(--tomato);
+}
+
 .add-circle:hover {
   fill: var(--polished-pine);
+}
+
+.add-circle-expense-color:hover {
+  fill: var(--tomato-2);
 }
 
 .value-btn-container {
